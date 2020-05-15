@@ -82,12 +82,15 @@ func unmarshresp(data []byte) inet_diag_msg {
 	resp.id.idiag_dport = nlenc.Uint16(data[6:8])
 	resp.id.idiag_src[0] = nlenc.Uint32(data[8:12])
 	resp.id.idiag_dst[0] = nlenc.Uint32(data[24:28])
+	resp.id.idiag_if = nlenc.Uint32(data[40:44])
+	resp.id.idiag_cookie[0] = nlenc.Uint32(data[44:48])
+	resp.id.idiag_cookie[1] = nlenc.Uint32(data[48:52])
 
-	resp.idiag_expires = nlenc.Uint32(data[40:44])
-	resp.idiag_rqueue = nlenc.Uint32(data[44:48])
-	resp.idiag_wqueue = nlenc.Uint32(data[48:52])
-	resp.idiag_uid = nlenc.Uint32(data[52:56])
-	resp.idiag_inode = nlenc.Uint32(data[56:60])
+	resp.idiag_expires = nlenc.Uint32(data[52:56])
+	resp.idiag_rqueue = nlenc.Uint32(data[56:60])
+	resp.idiag_wqueue = nlenc.Uint32(data[60:64])
+	resp.idiag_uid = nlenc.Uint32(data[64:68])
+	resp.idiag_inode = nlenc.Uint32(data[68:72])
 	return resp
 }
 
