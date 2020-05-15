@@ -40,7 +40,7 @@ func main() {
 	conn_req := inet_diag_req_v2{
 		sdiag_family:syscall.AF_INET,
 		sdiag_protocol:syscall.IPPROTO_TCP,
-		//idiag_stats:((1<<TCP_LISTEN) | (1<<TCP_ESTABLISHED)),
+		idiag_stats:((1<<TCP_LISTEN) | (1<<TCP_ESTABLISHED)),
 		//sdiag_ext: (1<<(INET_DIAG_INFO-1)),
 		// 特定的ip port socket inode 查询
 		// 注意 C 结构体中说明 id 中ip | port 固定为大端序的
