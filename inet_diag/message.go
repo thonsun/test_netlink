@@ -150,6 +150,19 @@ const (
 	__INET_DIAG_MAX
 )
 
+func unint16LE2BE(s uint16) uint16 {
+	var buf [2]byte
+	binary.LittleEndian.PutUint16(buf[:],s)
+	d := binary.BigEndian.Uint16(buf[:])
+	return d
+}
+
+func unint32LE2BE(s uint32) uint32 {
+	var buf [4]byte
+	binary.LittleEndian.PutUint32(buf[:],s)
+	d := binary.BigEndian.Uint32(buf[:])
+	return d
+}
 
 
 

@@ -60,6 +60,8 @@ func main() {
 	//fmt.Printf("recieve msg:%v\n",msg)
 	for _,msg := range msgs {
 		resp := unmarshresp(msg.Data)
-		fmt.Printf("%v\n",resp)
+		fmt.Printf("src:%v:%v dst:%v:%v user:%v inode:%v\n",unint32LE2BE(resp.id.idiag_src[0]),
+			unint16LE2BE(resp.id.idiag_sport),unint32LE2BE(resp.id.idiag_dst[0]),unint16LE2BE(resp.id.idiag_dport),
+			resp.idiag_uid,resp.idiag_inode)
 	}
 }
