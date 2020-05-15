@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/binary"
 	"github.com/mdlayher/netlink/nlenc"
 )
@@ -40,6 +41,22 @@ func (req inet_diag_req_v2) marshalBinary() ([]byte, error) {
 	return bytes,nil
 }
 
+func (req inet_diag_req_v2) marshalBinary2()([]byte,error) {
+	buf := bytes.NewBuffer(make([]byte,0,binary.Size(req)))
+	order := binary.LittleEndian
+	binary.Write(buf,order,req.sdiag_family)
+	binary.Write(buf,order,req.sdiag_protocol)
+	binary.Write(buf,order,req.sdiag_ext)
+	binary.Write(buf,order, req.pad)
+	binary.Write(buf,order,req.idiag_stats)
+
+	binary.Write(buf,order,req.id.idiag_sport)
+	binary.Write(buf,order,req.id.idiag_dport)
+	binary.Write(buf,order,req.id.idiag_src)
+	binary.Write(buf,order,req.id.idiag_dst)
+	return buf.Bytes(),nil
+}
+
 // resp struct
 type inet_diag_msg struct {
 	idiag_family uint8
@@ -71,6 +88,14 @@ func unmarshresp(data []byte) inet_diag_msg {
 	resp.idiag_wqueue = nlenc.Uint32(data[48:52])
 	resp.idiag_uid = nlenc.Uint32(data[52:56])
 	resp.idiag_inode = nlenc.Uint32(data[56:60])
+	return resp
+}
+
+func unmarshresp2(data []byte) inet_diag_msg {
+	buf := bytes.NewBuffer(data)
+	resp := inet_diag_msg{}
+	order := binary.LittleEndian
+	binary.Read(buf,order,resp)
 	return resp
 }
 

@@ -35,7 +35,7 @@ func main() {
 		//sdiag_ext: (1<<(INET_DIAG_INFO-1)),
 		//id: inet_diag_sockid{idiag_src:src,idiag_sport:sport,idiag_dst:dst,idiag_dport:dport},
 	}
-	data, err := conn_req.marshalBinary()
+	data, err := conn_req.marshalBinary2()
 	if err != nil{
 		log.Fatalln("data to byte error:",err)
 	}
@@ -59,7 +59,7 @@ func main() {
 	}
 	//fmt.Printf("recieve msg:%v\n",msg)
 	for _,msg := range msgs {
-		resp := unmarshresp(msg.Data)
+		resp := unmarshresp2(msg.Data)
 		fmt.Printf("%v\n",resp)
 	}
 }
