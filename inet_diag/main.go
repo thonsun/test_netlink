@@ -12,11 +12,21 @@ const (
 	SOCK_DIAG_BY_FAMILY netlink.HeaderType = 20 //
 )
 
+// byte
+//var (
+//	src = [4]uint32{167955888,0,0,0}
+//	sport uint16 = 22
+//	dst = [4]uint32{167953822,0,0,0}
+//	dport uint16 = 60486
+//)
+
+// home
+// inode 277106
 var (
-	src = [4]uint32{167955888,0,0,0}
+	src = [4]uint32{3232237682,0,0,0}
 	sport uint16 = 22
-	dst = [4]uint32{167953822,0,0,0}
-	dport uint16 = 60486
+	dst = [4]uint32{3232237811,0,0,0}
+	dport uint16 = 63309
 )
 
 func main() {
@@ -30,10 +40,11 @@ func main() {
 	conn_req := inet_diag_req_v2{
 		sdiag_family:syscall.AF_INET,
 		sdiag_protocol:syscall.IPPROTO_TCP,
+		//idiag_stats:((1<<TCP_LISTEN) | (1<<TCP_ESTABLISHED)),
+		//sdiag_ext: (1<<(INET_DIAG_INFO-1)),
 		// 特定的ip port socket inode 查询
-		idiag_stats:((1<<TCP_LISTEN) | (1<<TCP_ESTABLISHED)),
-		sdiag_ext: (1<<(INET_DIAG_INFO-1)),
-		//id: inet_diag_sockid{idiag_src:src,idiag_sport:sport,idiag_dst:dst,idiag_dport:dport},
+		// 注意 C 结构体中说明 id 中ip | port 固定为大端序的
+		id: inet_diag_sockid{idiag_src:src,idiag_sport:sport,idiag_dst:dst,idiag_dport:dport},
 	}
 	data, err := conn_req.marshalBinary()
 	if err != nil{

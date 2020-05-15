@@ -35,10 +35,10 @@ func (req inet_diag_req_v2) marshalBinary() ([]byte, error) {
 	nlenc.PutUint8(bytes[3:4],req.pad)
 	nlenc.PutUint32(bytes[4:8],req.idiag_stats)
 	//id 的写入
-	nlenc.PutUint16(bytes[8:10],req.id.idiag_sport)
-	nlenc.PutUint16(bytes[10:12],req.id.idiag_dport)
-	nlenc.PutUint32(bytes[12:16],req.id.idiag_src[0])
-	nlenc.PutUint32(bytes[28:32],req.id.idiag_dst[0])
+	nlenc.PutUint16(bytes[8:10],unint16LE2BE(req.id.idiag_sport))
+	nlenc.PutUint16(bytes[10:12],unint16LE2BE(req.id.idiag_dport))
+	nlenc.PutUint32(bytes[12:16],unint32LE2BE(req.id.idiag_src[0]))
+	nlenc.PutUint32(bytes[28:32],unint32LE2BE(req.id.idiag_dst[0]))
 	return bytes,nil
 }
 
