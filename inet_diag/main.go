@@ -31,7 +31,7 @@ func main() {
 		sdiag_family:syscall.AF_INET,
 		sdiag_protocol:syscall.IPPROTO_TCP,
 		// 特定的ip port socket inode 查询
-		idiag_stats:1,
+		idiag_stats:((1<<TCP_LISTEN) | (1<<TCP_ESTABLISHED) | (1<<TCP_TIME_WAIT)),
 		//sdiag_ext: (1<<(INET_DIAG_INFO-1)),
 		//id: inet_diag_sockid{idiag_src:src,idiag_sport:sport,idiag_dst:dst,idiag_dport:dport},
 	}
