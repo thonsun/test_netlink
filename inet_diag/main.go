@@ -54,7 +54,7 @@ func main() {
 		Header: netlink.Header{
 			Type: SOCK_DIAG_BY_FAMILY,
 			//Flags:netlink.Request|netlink.Dump,
-			Flags:netlink.Request | netlink.Match,
+			Flags:netlink.Request | netlink.Dump,
 		},
 		Data: data,
 	}
