@@ -60,6 +60,6 @@ func main() {
 	//fmt.Printf("recieve msg:%v\n",msg)
 	for _,msg := range msgs {
 		resp := unmarshresp(msg.Data)
-		fmt.Printf("%#v\n",resp)
+		fmt.Printf("%v\n",resp)
 	}
 }
