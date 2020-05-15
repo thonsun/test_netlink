@@ -25,6 +25,7 @@ type inet_diag_req_v2 struct {
 	idiag_stats uint32
 	id inet_diag_sockid
 }
+var order = nlenc.NativeEndian()
 
 func (req inet_diag_req_v2) marshalBinary() ([]byte, error) {
 	bytes := make([]byte,binary.Size(req))
@@ -43,7 +44,6 @@ func (req inet_diag_req_v2) marshalBinary() ([]byte, error) {
 
 func (req inet_diag_req_v2) marshalBinary2()([]byte,error) {
 	buf := bytes.NewBuffer(make([]byte,0,binary.Size(req)))
-	order := binary.LittleEndian
 	binary.Write(buf,order,req.sdiag_family)
 	binary.Write(buf,order,req.sdiag_protocol)
 	binary.Write(buf,order,req.sdiag_ext)
@@ -94,7 +94,6 @@ func unmarshresp(data []byte) inet_diag_msg {
 func unmarshresp2(data []byte) inet_diag_msg {
 	buf := bytes.NewBuffer(data)
 	resp := inet_diag_msg{}
-	order := binary.LittleEndian
 	binary.Read(buf,order,resp)
 	return resp
 }
