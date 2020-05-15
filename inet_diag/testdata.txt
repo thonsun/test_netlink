@@ -1,0 +1,31 @@
+[sudo] password for thonsun:
+User: root (UID: 0) Src: 0.0.0.0:27017 Dst: 0.0.0.0:0 inoid:21931
+	State: LISTEN RTT: 0ms (var. 0ms) Recv. RTT: 0ms Snd_cwnd: 0/10
+User: root (UID: 0) Src: 127.0.1.1:53 Dst: 0.0.0.0:0 inoid:22254
+	State: LISTEN RTT: 0ms (var. 0ms) Recv. RTT: 0ms Snd_cwnd: 0/10
+User: root (UID: 0) Src: 0.0.0.0:22 Dst: 0.0.0.0:0 inoid:242038
+	State: LISTEN RTT: 0ms (var. 0ms) Recv. RTT: 0ms Snd_cwnd: 0/10
+User: root (UID: 0) Src: 127.0.0.1:631 Dst: 0.0.0.0:0 inoid:71068
+	State: LISTEN RTT: 0ms (var. 0ms) Recv. RTT: 0ms Snd_cwnd: 0/10
+User: kibana (UID: 123) Src: 0.0.0.0:5601 Dst: 0.0.0.0:0 inoid:31154
+	State: LISTEN RTT: 0ms (var. 0ms) Recv. RTT: 0ms Snd_cwnd: 0/10
+User: kibana (UID: 123) Src: 127.0.0.1:57288 Dst: 127.0.0.1:9200 inoid:121563
+	State: ESTABLISHED RTT: 0.361ms (var. 0.035ms) Recv. RTT: 259128ms Snd_cwnd: 0/10
+User: root (UID: 0) Src: 10.2.205.176:22 Dst: 10.2.197.158:60525 inoid:212903
+	State: ESTABLISHED RTT: 0.29ms (var. 0.055ms) Recv. RTT: 0.001ms Snd_cwnd: 0/10
+User: root (UID: 0) Src: 10.2.205.176:22 Dst: 10.2.197.158:60486 inoid:204376 ******test data ****
+	State: ESTABLISHED RTT: 0.206ms (var. 0.099ms) Recv. RTT: 2ms Snd_cwnd: 0/13
+User: root (UID: 0) Src: 10.2.205.176:22 Dst: 10.2.197.158:60522 inoid:212774
+	State: ESTABLISHED RTT: 0.127ms (var. 0.07ms) Recv. RTT: 1ms Snd_cwnd: 0/10
+User: kibana (UID: 123) Src: 127.0.0.1:57280 Dst: 127.0.0.1:9200 inoid:121555
+	State: ESTABLISHED RTT: 1.554ms (var. 0.45ms) Recv. RTT: 95.75ms Snd_cwnd: 0/10
+User: kibana (UID: 123) Src: 127.0.0.1:58026 Dst: 127.0.0.1:9200 inoid:228508
+	State: ESTABLISHED RTT: 18.563ms (var. 3.842ms) Recv. RTT: 18.646ms Snd_cwnd: 0/10
+User: kibana (UID: 123) Src: 127.0.0.1:57282 Dst: 127.0.0.1:9200 inoid:121557
+	State: ESTABLISHED RTT: 20.127ms (var. 2.267ms) Recv. RTT: 20.919ms Snd_cwnd: 0/10
+User: kibana (UID: 123) Src: 127.0.0.1:57278 Dst: 127.0.0.1:9200 inoid:121553
+	State: ESTABLISHED RTT: 1.353ms (var. 0.506ms) Recv. RTT: 5792.37ms Snd_cwnd: 0/10
+User: kibana (UID: 123) Src: 127.0.0.1:57276 Dst: 127.0.0.1:9200 inoid:121551
+	State: ESTABLISHED RTT: 2.089ms (var. 0.667ms) Recv. RTT: 65.142ms Snd_cwnd: 0/10
+User: kibana (UID: 123) Src: 127.0.0.1:57286 Dst: 127.0.0.1:9200 inoid:121561
+	State: ESTABLISHED RTT: 1.609ms (var. 0.688ms) Recv. RTT: 74.75ms Snd_cwnd: 0/10
