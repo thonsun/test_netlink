@@ -31,9 +31,9 @@ func main() {
 		sdiag_family:syscall.AF_INET,
 		sdiag_protocol:syscall.IPPROTO_TCP,
 		// 特定的ip port socket inode 查询
-		//idiag_stats:TCPF_ALL &^((1<<TCP_SYN_RECV) | (1<<TCP_TIME_WAIT) | (1<<TCP_CLOSE)),
-		//sdiag_ext: (1<<(INET_DIAG_INFO-1)),
-		id: inet_diag_sockid{idiag_src:src,idiag_sport:sport,idiag_dst:dst,idiag_dport:dport},
+		idiag_stats:TCPF_ALL &^((1<<TCP_SYN_RECV) | (1<<TCP_TIME_WAIT) | (1<<TCP_CLOSE)),
+		sdiag_ext: (1<<(INET_DIAG_INFO-1)),
+		//id: inet_diag_sockid{idiag_src:src,idiag_sport:sport,idiag_dst:dst,idiag_dport:dport},
 	}
 	data, err := conn_req.marshalBinary()
 	if err != nil{
@@ -42,7 +42,7 @@ func main() {
 	req := netlink.Message{
 		Header: netlink.Header{
 			Type: SOCK_DIAG_BY_FAMILY,
-			Flags:netlink.Request,
+			Flags:netlink.Request|netlink.Dump,
 		},
 		Data: data,
 	}
