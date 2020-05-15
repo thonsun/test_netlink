@@ -51,11 +51,11 @@ func main() {
 	if err != nil {
 		log.Printf("send req msg error:%v",err)
 	}
-	fmt.Printf("send status:%v",msgs)
+	fmt.Printf("send status:%#v\n",msgs)
 
 	msg, err := c.Receive()
 	if err != nil {
-		fmt.Printf("recieve msg error:%v",err)
+		fmt.Printf("recieve msg error:%#v\n",err)
 	}
-	fmt.Printf("recieve msg:%v",msg)
+	fmt.Printf("recieve msg:%#v\n",msg)
 }
