@@ -47,15 +47,19 @@ func main() {
 		Data: data,
 	}
 
-	msgs, err := c.Send(req)
+	m, err := c.Send(req)
 	if err != nil {
 		log.Printf("send req msg error:%v",err)
 	}
-	fmt.Printf("send status:%v\n",msgs)
+	fmt.Printf("send status:%v\n",m)
 
-	msg, err := c.Receive()
+	msgs, err := c.Receive()
 	if err != nil {
 		fmt.Printf("recieve msg error:%#v\n",err)
 	}
-	fmt.Printf("recieve msg:%v\n",msg)
+	//fmt.Printf("recieve msg:%v\n",msg)
+	for _,msg := range msgs {
+		resp := unmarshresp(msg.Data)
+		fmt.Printf("%#v\n",resp)
+	}
 }

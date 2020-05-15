@@ -40,6 +40,40 @@ func (req inet_diag_req_v2) marshalBinary() ([]byte, error) {
 	return bytes,nil
 }
 
+// resp struct
+type inet_diag_msg struct {
+	idiag_family uint8
+	idiag_state uint8
+	idiag_timer uint8
+	idiag_retrans uint8
+	id inet_diag_sockid
+	idiag_expires uint32
+	idiag_rqueue uint32
+	idiag_wqueue uint32
+	idiag_uid uint32
+	idiag_inode uint32
+}
+
+func unmarshresp(data []byte) inet_diag_msg {
+	resp := inet_diag_msg{}
+	resp.idiag_family = nlenc.Uint8(data[0:1])
+	resp.idiag_state = nlenc.Uint8(data[1:2])
+	resp.idiag_timer = nlenc.Uint8(data[2:3])
+	resp.idiag_retrans = nlenc.Uint8(data[3:4])
+
+	resp.id.idiag_sport = nlenc.Uint16(data[4:6])
+	resp.id.idiag_dport = nlenc.Uint16(data[6:8])
+	resp.id.idiag_src[0] = nlenc.Uint32(data[8:12])
+	resp.id.idiag_dst[0] = nlenc.Uint32(data[24:28])
+
+	resp.idiag_expires = nlenc.Uint32(data[40:44])
+	resp.idiag_rqueue = nlenc.Uint32(data[44:48])
+	resp.idiag_wqueue = nlenc.Uint32(data[48:52])
+	resp.idiag_uid = nlenc.Uint32(data[52:56])
+	resp.idiag_inode = nlenc.Uint32(data[56:60])
+	return resp
+}
+
 // tcp socket state
 type socket_stat uint32
 
