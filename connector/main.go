@@ -53,10 +53,10 @@ func main() {
 		}
 		for _, msg := range msgs{
 			buf := bytes.NewBuffer(msg.Data)
-			msg := &cnMsg{}
+			m := &cnMsg{}
 			hdr := &procEventHeader{}
 
-			binary.Read(buf, binary.LittleEndian, msg)
+			binary.Read(buf, binary.LittleEndian, m)
 			binary.Read(buf, binary.LittleEndian, hdr)
 			switch hdr.What {
 			case PROC_EVENT_EXEC:
