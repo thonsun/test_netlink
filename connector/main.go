@@ -10,11 +10,11 @@ import (
 )
 
 func main() {
-	//conf := netlink.Config{
-	//	Groups:  CN_IDX_PROC,
-	//}
-	//c, err := netlink.Dial(syscall.NETLINK_CONNECTOR,&conf)
-	c, err := netlink.Dial(syscall.NETLINK_CONNECTOR,nil)
+	conf := netlink.Config{
+		Groups:  0,
+	}
+	c, err := netlink.Dial(syscall.NETLINK_CONNECTOR,&conf)
+
 	if err != nil {
 		log.Fatalf("create netlink_connector socket error:%v",err)
 	}
