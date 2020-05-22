@@ -64,11 +64,21 @@ func main() {
 			}
 			switch hdr.What {
 			case PROC_EVENT_EXEC:
-				log.Println("exec")
+				event := &execProcEvent{}
+				binary.Read(buf,binary.LittleEndian,event)
+				log.Printf("exec pid:%v tgid:%v\n",event.ProcessPid,event.ProcessTgid)
 			case PROC_EVENT_FORK:
-				log.Println("fork")
+				event := &forkProcEvent{}
+				binary.Read(buf,binary.LittleEndian,event)
+				log.Printf("fork ppid:%v pid:%v\n",event.ParentPid,event.ChildPid)
 			case PROC_EVENT_EXIT:
-				log.Println("exit")
+				event := &exitProcEvent{}
+				binary.Read(buf,binary.LittleEndian,&event)
+				log.Printf("exit pid:%v code:%v\n",event.ProcessPid,event.ExitCode)
+			case PROC_EVENT_COMM:
+				event := &commProcEvent{}
+				binary.Read(buf,binary.LittleEndian,event)
+				log.Printf("comm pid:%v comm:%v",event.ProcessPid,string(event.Comm[:]))
 			}
 		}
 	}
@@ -175,6 +185,13 @@ type exitProcEvent struct {
 	ProcessTgid uint32
 	ExitCode    uint32
 	ExitSignal  uint32
+}
+
+// linux/cn_proc.h:struc comm_proc_event.comm
+type commProcEvent struct {
+	ProcessPid uint32
+	ProcessTgid uint32
+	Comm [16]byte
 }
 
 // standard netlink header + connector header + data
