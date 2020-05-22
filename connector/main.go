@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"encoding/binary"
-	"fmt"
 	"github.com/mdlayher/netlink"
 	"log"
 	"os"
@@ -40,11 +39,10 @@ func main() {
 		Data:   data,
 	}
 
-	resp, err := c.Send(req)
+	_ , err = c.Send(req)
 	if err != nil {
 		log.Printf("send msg error:%v",err)
 	}
-	fmt.Print(resp.Header.Type,string(resp.Data))
 
 	for {
 		msgs, err := c.Receive()
@@ -56,8 +54,14 @@ func main() {
 			m := &cnMsg{}
 			hdr := &procEventHeader{}
 
-			binary.Read(buf, binary.LittleEndian, m)
-			binary.Read(buf, binary.LittleEndian, hdr)
+			err := binary.Read(buf, binary.LittleEndian, m)
+			if err != nil {
+				log.Printf("parse cnmsg error:%v",err)
+			}
+			err = binary.Read(buf, binary.LittleEndian, hdr)
+			if err != nil {
+				log.Printf("parse proc event error:%v",err)
+			}
 			switch hdr.What {
 			case PROC_EVENT_EXEC:
 				log.Println("exec")
