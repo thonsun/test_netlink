@@ -11,7 +11,7 @@ import (
 
 func main() {
 	conf := netlink.Config{
-		Groups:  0,
+		Groups:  CN_IDX_PROC,
 	}
 	c, err := netlink.Dial(syscall.NETLINK_CONNECTOR,&conf)
 
