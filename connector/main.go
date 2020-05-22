@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/binary"
 	"fmt"
 	"github.com/mdlayher/netlink"
@@ -48,7 +49,13 @@ func main() {
 			log.Printf("recieve msg error:%v",err)
 		}
 		for _, msg := range msgs{
-			switch msg.Header.Type {
+			buf := bytes.NewBuffer(msg.Data)
+			msg := &cnMsg{}
+			hdr := &procEventHeader{}
+
+			binary.Read(buf, binary.LittleEndian, msg)
+			binary.Read(buf, binary.LittleEndian, hdr)
+			switch hdr.What {
 			case PROC_EVENT_EXEC:
 				log.Println("exec")
 			case PROC_EVENT_FORK:
