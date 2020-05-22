@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="37e8e139-4294-44b9-9340-d86c234bbb3c" name="Default Changelist" comment="" />
+    <list default="true" id="37e8e139-4294-44b9-9340-d86c234bbb3c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/connector/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/connector/main.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +57,7 @@
       <workItem from="1589514112701" duration="6538000" />
       <workItem from="1590134454398" duration="6428000" />
       <workItem from="1590149538613" duration="1504000" />
-      <workItem from="1590152965048" duration="948000" />
+      <workItem from="1590152965048" duration="1402000" />
     </task>
     <servers />
   </component>
