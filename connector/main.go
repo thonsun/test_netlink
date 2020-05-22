@@ -21,13 +21,13 @@ func main() {
 
 	// 注册监听内核进程事件信息
 	cn_id := cnID{
-		idx: CN_IDX_PROC,
-		val: CN_VAL_PROC,
+		Idx: CN_IDX_PROC,
+		Val: CN_VAL_PROC,
 	}
 	cn_msg := cnMsg{
-		id:    cn_id,
-		len:   4,
-		flags: 0,
+		ID:    cn_id,
+		Len:   4,
+		Flags: 0,
 	}
 	data := cn_msg.marshal2Bytes(PROC_CN_MCAST_LISTEN)
 
@@ -78,49 +78,49 @@ func main() {
 
 /*
 struct cnID {
-	__u32 idx;
-	__u32 val;
+	__u32 Idx;
+	__u32 Val;
 };
 
 struct cnMsg {
-	struct cnID id;
+	struct cnID ID;
 
-	__u32 seq;
-	__u32 ack;
+	__u32 Seq;
+	__u32 Ack;
 
-	__u16 len;		//Length of the following data
-	__u16 flags;
+	__u16 Len;		//Length of the following data
+	__u16 Flags;
 	__u8 data[0];
 };
  */
 
 type cnID struct {
-	idx uint32
-	val uint32
+	Idx uint32
+	Val uint32
 }
 
 type cnMsg struct {
-	id    cnID
-	seq   uint32
-	ack   uint32
-	len   uint16
-	flags uint16
+	ID    cnID
+	Seq   uint32
+	Ack   uint32
+	Len   uint16
+	Flags uint16
 }
 
 func (msg *cnMsg) marshal2Bytes(op uint32) []byte {
 	buf := make([]byte,binary.Size(msg)+binary.Size(op))
-	binary.LittleEndian.PutUint32(buf[0:4],msg.id.idx)
-	binary.LittleEndian.PutUint32(buf[4:8],msg.id.val)
-	binary.LittleEndian.PutUint32(buf[8:12],msg.seq)
-	binary.LittleEndian.PutUint32(buf[12:16],msg.ack)
-	binary.LittleEndian.PutUint16(buf[16:18],msg.len)
-	binary.LittleEndian.PutUint16(buf[18:20],msg.flags)
+	binary.LittleEndian.PutUint32(buf[0:4],msg.ID.Idx)
+	binary.LittleEndian.PutUint32(buf[4:8],msg.ID.Val)
+	binary.LittleEndian.PutUint32(buf[8:12],msg.Seq)
+	binary.LittleEndian.PutUint32(buf[12:16],msg.Ack)
+	binary.LittleEndian.PutUint16(buf[16:18],msg.Len)
+	binary.LittleEndian.PutUint16(buf[18:20],msg.Flags)
 	binary.LittleEndian.PutUint32(buf[20:24],op)
 	return buf
 }
 
 const (
-	//id 标识
+	//ID 标识
 	CN_IDX_PROC = 0x1
 	CN_VAL_PROC	 = 0x1
 
