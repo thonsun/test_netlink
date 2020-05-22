@@ -14,12 +14,13 @@ const (
 	SOCK_DIAG_BY_FAMILY netlink.HeaderType = 20 //nlmsg_hdr nlmsg_type 类型
 )
 
+// home
 // 指定IP 五元组信息
 var (
 	src = [4]uint32{3232237682,0,0,0} // 兼容ipv6,ipv4 只用到第一个数组
 	sport uint16 = 22
 	dst = [4]uint32{3232237811,0,0,0}
-	dport uint16 = 63309
+	dport uint16 = 63044
 )
 
 func main() {
