@@ -11,7 +11,7 @@ import (
 
 func main() {
 	conf := netlink.Config{
-		Groups:  CN_IDX_PROC,
+		Groups:  CN_IDX_PROC, //需要加入多播组1
 	}
 	c, err := netlink.Dial(syscall.NETLINK_CONNECTOR,&conf)
 
@@ -63,23 +63,25 @@ func main() {
 			if err != nil {
 				log.Printf("parse proc event error:%v",err)
 			}
+			count := 0
 			switch hdr.What {
 			case PROC_EVENT_EXEC:
 				event := &execProcEvent{}
 				binary.Read(buf,binary.LittleEndian,event)
-				log.Printf("exec pid:%v tgid:%v\n",event.ProcessPid,event.ProcessTgid)
-			case PROC_EVENT_FORK:
-				event := &forkProcEvent{}
-				binary.Read(buf,binary.LittleEndian,event)
-				log.Printf("fork ppid:%v pid:%v\n",event.ParentPid,event.ChildPid)
-			case PROC_EVENT_EXIT:
-				event := &exitProcEvent{}
-				binary.Read(buf,binary.LittleEndian,&event)
-				log.Printf("exit pid:%v code:%v\n",event.ProcessPid,event.ExitCode)
-			case PROC_EVENT_COMM:
-				event := &commProcEvent{}
-				binary.Read(buf,binary.LittleEndian,event)
-				log.Printf("comm pid:%v comm:%v",event.ProcessPid,string(event.Comm[:]))
+				count += 1
+				log.Printf("exec pid:%v tgid:%v\n count:%d",event.ProcessPid,event.ProcessTgid,count)
+			//case PROC_EVENT_FORK:
+			//	event := &forkProcEvent{}
+			//	binary.Read(buf,binary.LittleEndian,event)
+			//	log.Printf("fork ppid:%v pid:%v\n",event.ParentPid,event.ChildPid)
+			//case PROC_EVENT_EXIT:
+			//	event := &exitProcEvent{}
+			//	binary.Read(buf,binary.LittleEndian,&event)
+			//	log.Printf("exit pid:%v code:%v\n",event.ProcessPid,event.ExitCode)
+			//case PROC_EVENT_COMM:
+			//	event := &commProcEvent{}
+			//	binary.Read(buf,binary.LittleEndian,event)
+			//	log.Printf("comm pid:%v comm:%v",event.ProcessPid,string(event.Comm[:]))
 			}
 		}
 	}
