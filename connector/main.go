@@ -50,6 +50,7 @@ func main() {
 		if err != nil {
 			log.Printf("recieve msg error:%v",err)
 		}
+		count := 0
 		for _, msg := range msgs{
 			buf := bytes.NewBuffer(msg.Data)
 			m := &cnMsg{}
@@ -63,7 +64,6 @@ func main() {
 			if err != nil {
 				log.Printf("parse proc event error:%v",err)
 			}
-			count := 0
 			switch hdr.What {
 			case PROC_EVENT_EXEC:
 				event := &execProcEvent{}
